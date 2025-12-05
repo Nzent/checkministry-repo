@@ -36,6 +36,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { IconCopy, IconPencil, IconTrashX } from "@tabler/icons-react"
+import Link from "next/link"
 
 
 
@@ -269,7 +270,9 @@ export function OrderManagementTable() {
                     </DropdownMenuContent>
                 </DropdownMenu>
                 {/* new order button */}
-                <Button className="ml-4">New Order</Button>
+                <Link href="/new-order">
+                    <Button className="ml-4">New Order</Button>
+                </Link>
             </div>
             <div className="overflow-hidden rounded-md border">
                 <Table>
