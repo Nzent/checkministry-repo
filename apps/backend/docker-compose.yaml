@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres
+    container_name: checkministryDB
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: checkministry
+      POSTGRES_PASSWORD: checkministry
+      POSTGRES_DB: checkministryDB
