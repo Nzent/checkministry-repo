@@ -1,6 +1,6 @@
 {
-  "id": "a88a28fc-ac17-43ad-9e9c-9f66a730c88a",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "ee1729ba-cbe9-43e2-b567-5ea1aafb0582",
+  "prevId": "a88a28fc-ac17-43ad-9e9c-9f66a730c88a",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -8,42 +8,26 @@
       "name": "OrderProductMap",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
+        "Id": {
+          "name": "Id",
           "type": "serial",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true
         },
         "orderId": {
           "name": "orderId",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "productId": {
           "name": "productId",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
-      "indexes": {
-        "orderIdIndex": {
-          "name": "orderIdIndex",
-          "columns": [
-            {
-              "expression": "orderId",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
         "OrderProductMap_orderId_ORDERS_Id_fk": {
           "name": "OrderProductMap_orderId_ORDERS_Id_fk",
@@ -55,7 +39,7 @@
           "columnsTo": [
             "Id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
           "onUpdate": "no action"
         },
         "OrderProductMap_productId_PRODUCTS_Id_fk": {
@@ -68,19 +52,11 @@
           "columnsTo": [
             "Id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {
-        "OrderProductMap_orderId_productId_pk": {
-          "name": "OrderProductMap_orderId_productId_pk",
-          "columns": [
-            "orderId",
-            "productId"
-          ]
-        }
-      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
