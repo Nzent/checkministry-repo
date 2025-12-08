@@ -1,88 +1,112 @@
 {
-  "id": "2f760a27-47ce-4310-851b-966e93a53a7c",
+  "id": "a88a28fc-ac17-43ad-9e9c-9f66a730c88a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.order_product_map": {
-      "name": "order_product_map",
+    "public.OrderProductMap": {
+      "name": "OrderProductMap",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
           "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "order_id": {
-          "name": "order_id",
-          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "product_id": {
-          "name": "product_id",
+        "orderId": {
+          "name": "orderId",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
+        },
+        "productId": {
+          "name": "productId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "orderIdIndex": {
+          "name": "orderIdIndex",
+          "columns": [
+            {
+              "expression": "orderId",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {
-        "order_product_map_order_id_orders_id_fk": {
-          "name": "order_product_map_order_id_orders_id_fk",
-          "tableFrom": "order_product_map",
-          "tableTo": "orders",
+        "OrderProductMap_orderId_ORDERS_Id_fk": {
+          "name": "OrderProductMap_orderId_ORDERS_Id_fk",
+          "tableFrom": "OrderProductMap",
+          "tableTo": "ORDERS",
           "columnsFrom": [
-            "order_id"
+            "orderId"
           ],
           "columnsTo": [
-            "id"
+            "Id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "order_product_map_product_id_products_id_fk": {
-          "name": "order_product_map_product_id_products_id_fk",
-          "tableFrom": "order_product_map",
-          "tableTo": "products",
+        "OrderProductMap_productId_PRODUCTS_Id_fk": {
+          "name": "OrderProductMap_productId_PRODUCTS_Id_fk",
+          "tableFrom": "OrderProductMap",
+          "tableTo": "PRODUCTS",
           "columnsFrom": [
-            "product_id"
+            "productId"
           ],
           "columnsTo": [
-            "id"
+            "Id"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "OrderProductMap_orderId_productId_pk": {
+          "name": "OrderProductMap_orderId_productId_pk",
+          "columns": [
+            "orderId",
+            "productId"
+          ]
+        }
+      },
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.orders": {
-      "name": "orders",
+    "public.ORDERS": {
+      "name": "ORDERS",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
+        "Id": {
+          "name": "Id",
           "type": "serial",
           "primaryKey": true,
           "notNull": true
         },
-        "order_description": {
-          "name": "order_description",
+        "orderDescription": {
+          "name": "orderDescription",
           "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         },
-        "created_at": {
-          "name": "created_at",
+        "createdAt": {
+          "name": "createdAt",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "now()"
         }
       },
@@ -94,24 +118,24 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.products": {
-      "name": "products",
+    "public.PRODUCTS": {
+      "name": "PRODUCTS",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
+        "Id": {
+          "name": "Id",
           "type": "integer",
           "primaryKey": true,
           "notNull": true
         },
-        "product_name": {
-          "name": "product_name",
+        "productName": {
+          "name": "productName",
           "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         },
-        "product_description": {
-          "name": "product_description",
+        "productDescription": {
+          "name": "productDescription",
           "type": "text",
           "primaryKey": false,
           "notNull": false
