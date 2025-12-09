@@ -33,7 +33,7 @@ async function main() {
     },
   ]);
 
-  console.log('Dataabse seed done');
+  console.log('Databse seed done');
   process.exit(0);
 }
 

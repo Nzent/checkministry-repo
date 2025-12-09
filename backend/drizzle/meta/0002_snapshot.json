@@ -1,0 +1,140 @@
+{
+  "id": "67270938-af99-4907-a933-544e5ebcdb2e",
+  "prevId": "ee1729ba-cbe9-43e2-b567-5ea1aafb0582",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.OrderProductMap": {
+      "name": "OrderProductMap",
+      "schema": "",
+      "columns": {
+        "Id": {
+          "name": "Id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "orderId": {
+          "name": "orderId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "productId": {
+          "name": "productId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "OrderProductMap_orderId_ORDERS_Id_fk": {
+          "name": "OrderProductMap_orderId_ORDERS_Id_fk",
+          "tableFrom": "OrderProductMap",
+          "tableTo": "ORDERS",
+          "columnsFrom": [
+            "orderId"
+          ],
+          "columnsTo": [
+            "Id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "OrderProductMap_productId_PRODUCTS_Id_fk": {
+          "name": "OrderProductMap_productId_PRODUCTS_Id_fk",
+          "tableFrom": "OrderProductMap",
+          "tableTo": "PRODUCTS",
+          "columnsFrom": [
+            "productId"
+          ],
+          "columnsTo": [
+            "Id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ORDERS": {
+      "name": "ORDERS",
+      "schema": "",
+      "columns": {
+        "Id": {
+          "name": "Id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "orderDescription": {
+          "name": "orderDescription",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.PRODUCTS": {
+      "name": "PRODUCTS",
+      "schema": "",
+      "columns": {
+        "Id": {
+          "name": "Id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "productName": {
+          "name": "productName",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "productDescription": {
+          "name": "productDescription",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

@@ -15,6 +15,13 @@
       "when": 1765212991264,
       "tag": "0001_striped_warbound",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1765318741988,
+      "tag": "0002_watery_mandroid",
+      "breakpoints": true
     }
   ]
 }

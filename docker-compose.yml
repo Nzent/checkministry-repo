@@ -1,6 +1,24 @@
 version: "3.9"
 
 services:
+  database:
+    image: postgres:16
+    container_name: database_service
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: checkministry
+      POSTGRES_PASSWORD: checkministry
+      POSTGRES_DB: checkministryDB
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U checkministry -d checkministryDB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
   backend:
     build:
       context: ./backend
@@ -10,7 +28,16 @@ services:
       - "4000:4000"
     environment:
       - NODE_ENV=production
-    restart: always
+      - DATABASE_URL=postgresql://checkministry:checkministry@database:5432/checkministryDB
+    depends_on:
+      database:
+        condition: service_healthy # Wait for DB to be ready
+    # Option 1: Run migrations/seeds then start app
+    command: sh -c "npm run db:migrate && npm run db:seed && npm start"
+    # Option 2: Use entrypoint script (better)
+    # entrypoint: ["./docker-entrypoint.sh"]
+    # command: ["npm", "start"]
+    restart: unless-stopped
 
   frontend:
     build:
@@ -24,13 +51,7 @@ services:
       - NEXT_PUBLIC_API_URL=http://localhost:4000
     depends_on:
       - backend
-    restart: always
-  database:
-    image: postgres
-    container_name: checkministryDB
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: checkministry
-      POSTGRES_PASSWORD: checkministry
-      POSTGRES_DB: checkministryDB
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
