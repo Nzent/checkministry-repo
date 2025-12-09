@@ -32,6 +32,7 @@ const NewOrderPage = () => {
         setValue,
         watch,
     } = useForm<FormData>({
+        //@ts-expect-error zodResolver type issue
         resolver: zodResolver(formSchema),
         defaultValues: {
             orderDescription: '',
