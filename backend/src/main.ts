@@ -9,6 +9,15 @@ dotenv.config({
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Enable CORS
+  app.enableCors({
+    origin: ['http://localhost:3000'], // Your Next.js frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  });
+
   await app.listen(process.env.PORT ?? 4000);
 }
 bootstrap();

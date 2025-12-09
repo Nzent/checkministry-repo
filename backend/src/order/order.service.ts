@@ -43,7 +43,6 @@ export class OrderService {
       .leftJoin(orderProductMap, eq(orders.Id, orderProductMap.orderId))
       .groupBy(orders.Id, orders.orderDescription, orders.createdAt)
       .orderBy(orders.Id);
-
     return result;
   }
 
@@ -60,7 +59,23 @@ export class OrderService {
       .leftJoin(orderProductMap, eq(orders.Id, orderProductMap.orderId))
       .where(eq(orders.Id, id))
       .groupBy(orders.Id, orders.orderDescription, orders.createdAt);
-    return order;
+
+    if (!order) return null;
+
+    // 2️⃣ Fetch related product IDs
+    const productRows = await this.db
+      .select({ productId: orderProductMap.productId })
+      .from(orderProductMap)
+      .where(eq(orderProductMap.orderId, id));
+
+    // 3️⃣ Extract only IDs into an array
+    const products = productRows.map((p) => p.productId);
+
+    // 4️⃣ Merge and return
+    return {
+      ...order,
+      products,
+    };
   }
 
   // update one order

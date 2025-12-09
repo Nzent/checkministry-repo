@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+//@ts-expect-error
 import "@/styles/globals.css";
-import NextTopLoader from 'nextjs-toploader';
+import Providers from "../providers/Providers";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,10 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased w-1/2 mx-auto py-8`}
+        className={`${geistSans.variable} ${geistMono.variable}  antialiased flex flex-col justify-center items-center`}
       >
-        <NextTopLoader color="000000"/>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
