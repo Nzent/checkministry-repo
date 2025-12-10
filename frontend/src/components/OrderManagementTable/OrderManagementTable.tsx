@@ -134,13 +134,21 @@ export function OrderManagementTable() {
         onColumnVisibilityChange: setColumnVisibility,
         onGlobalFilterChange: setGlobalFilter,
         onRowSelectionChange: setRowSelection,
-        globalFilterFn: (row, filterValue) => {
-            const searchValue = filterValue.toLowerCase()
-            const orderId = String(row.getValue("Id")).toLowerCase()
-            const orderDescription = String(row.getValue("orderDescription")).toLowerCase()
 
-            return orderId.includes(searchValue) || orderDescription.includes(searchValue)
+        globalFilterFn: (row, columnId, filterValue) => {
+            const search = String(filterValue).toLowerCase().trim()
+            
+            // Get the values safely
+            const id = row.getValue("Id")
+            const desc = row.getValue("orderDescription")
+            
+            // Convert to string and lowercase, handle null/undefined
+            const idStr = id != null ? String(id).toLowerCase() : ""
+            const descStr = desc != null ? String(desc).toLowerCase() : ""
+
+            return idStr.includes(search) || descStr.includes(search)
         },
+
         state: {
             sorting,
             columnFilters,
@@ -176,8 +184,8 @@ export function OrderManagementTable() {
                 <div className="flex items-center py-4">
                     <Input
                         placeholder="Filter by order id or description..."
-                        value={globalFilter ?? ""}
-                        onChange={(event) => setGlobalFilter(event.target.value)}
+                        value={globalFilter}
+                        onChange={(e) => setGlobalFilter(e.target.value)}
                         className="max-w-sm"
                     />
 
