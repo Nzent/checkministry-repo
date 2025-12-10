@@ -5,9 +5,7 @@ Next.js (Frontend) · NestJS (Backend) · Drizzle ORM · PostgreSQL (Neon) · Do
 
 ---
 ## Live Hosted Link
-
-
-
+https://checkministry-frontend.vercel.app/
 
 ## API Endpoints (Postman)
 https://www.postman.com/lunar-robot-985940/workspace/checkministry-assesment
