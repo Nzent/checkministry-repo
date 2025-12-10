@@ -12,7 +12,10 @@ async function bootstrap() {
 
   // Enable CORS
   app.enableCors({
-    origin: ['http://localhost:3000'], // Your Next.js frontend URL
+    origin: [
+      'http://localhost:3000',
+      'https://checkministry-frontend.vercel.app',
+    ], // Your Next.js frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
