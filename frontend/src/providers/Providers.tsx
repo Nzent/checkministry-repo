@@ -16,7 +16,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
     return (
         <QueryClientProvider client={queryClient}>
             <NextTopLoader color="000000" />
-            <div className='w-1/2'>
+            <div className='w-1/2 max-md:w-full p-4'>
                 {children}
             </div>
             <ReactQueryDevtools initialIsOpen={false} />
